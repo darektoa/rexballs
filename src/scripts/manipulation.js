@@ -246,15 +246,15 @@ const addFavorite = db =>{
 // Function Mengambil Semua Data Favorit Player
 const getAllPlayer  = (db)=>{
     const tBody     = $('#player tbody');
-    tBody.innerHTML = '';
     
     const tx        = db.transaction(['player'], 'readonly');
     const playerOS  = tx.objectStore('player');
     const getAll    = playerOS.getAll();
-
+    
     getAll.onsuccess = ()=>{
         const result = getAll.result;
-
+        tBody.innerHTML = '';
+        
         if(result.length > 0){
             for(const item of result){
                 tBody.innerHTML += `
@@ -276,15 +276,14 @@ const getAllPlayer  = (db)=>{
 // Function Mengambil Semua Data Favorit Team
 const getAllTeam = (db)=>{
     const tBody        = $('#team tbody');
-    tBody.innerHTML    = '';
-
+    
     const tx     = db.transaction(['team'], 'readonly');
     const teamOS = tx.objectStore('team');
     const getAll = teamOS.getAll();
-
+    
     getAll.onsuccess = ()=>{
-        let i = 0;
         const result = getAll.result;
+        tBody.innerHTML    = '';
         
         if(result.length > 0){
             for(const item of result){
